@@ -1,2 +1,73 @@
-# sql_db
-bibliography project
+Проект представляет собой небольшую информационную систему библиографии и библиотечного фонда на PostgreSQL. В базе хранятся авторы, произведения, типы произведений, издания, издательства, переводчики, экземпляры книг (физические копии), читатели и выдачи.
+
+## Цель проекта
+
+Разработать SQL-базу данных для библиографической информации с поддержкой сложных связей, автоматизации (триггеры, процедуры) и интеграции с Python.
+
+## Особенности базы
+
+* PostgreSQL
+* моделирование сложной предметной области (произведения, издания, переводы, авторы);
+* связи many-to-many
+* оконные функции
+* риггеры и процедуры
+* создание связанного сценария работы через Python
+* подробные комментарии к запуску и работе функций
+
+## Структура проекта
+
+```text
+bibliography_project/
+│
+├── sql/
+│   ├── 01_create_tables.sql
+│   ├── 02_constraints_indexes.sql
+│   ├── 03_insert_demo_data.sql
+│   ├── 04_crud_examples.sql
+│   ├── 05_select_queries.sql
+│   ├── 06_aggregation_queries.sql
+│   ├── 07_subqueries_cte.sql
+│   ├── 08_window_functions.sql
+│   ├── 09_triggers.sql
+│   ├── 10_procedures.sql
+│   └── 11_procedure_calls.sql
+│
+├── app/
+│   ├── main.py
+│   ├── app.log
+│   └── run_db.ipynb
+│
+├── docker-compose.yml
+└── README.md
+```
+
+## Содержимое файлов
+
+### Папка `sql/`
+- **01_create_tables.sql** — создание таблиц базы данных и связей между ними.
+- **02_constraints_indexes.sql** — ограничения, проверки, индексы и комментарии к объектам.
+- **03_insert_demo_data.sql** — заполнение базы демонстрационными данными.
+- **04_crud_examples.sql** — примеры операций CREATE, READ, UPDATE, DELETE.
+- **05_select_queries.sql** — запросы с `JOIN`, `LEFT JOIN` и примером связей через `WHERE` без `JOIN`.
+- **06_aggregation_queries.sql** — агрегирующие запросы с `GROUP BY`, `HAVING`, `COUNT`, `AVG`, `MIN`, `MAX`.
+- **07_subqueries_cte.sql** — подзапросы, `EXISTS`, `NOT EXISTS` и `WITH`.
+- **08_window_functions.sql** — примеры оконных функций: `ROW_NUMBER`, `RANK`, `DENSE_RANK`, `LAG`, `LEAD`, `SUM OVER`, `AVG OVER`.
+- **09_triggers.sql** — триггеры для проверки доступности экземпляра и автоматического изменения статуса книги при выдаче и возврате.
+- **10_procedures.sql** — хранимые процедуры `issue_book`, `return_book`, `add_edition`.
+- **11_procedure_calls.sql** — демонстрация вызова процедур и проверка результатов до и после выполнения.
+
+### Папка `app/`
+- **main.py** — Python-скрипт для подключения к базе и выполнения связанного сценария работы с библиотекой (выдача и возврат книги).
+- **app.log** — лог выполнения Python-сценария.
+- **run_db.ipynb** — notebook для поэтапного запуска SQL-файлов и проверки работы базы.
+
+## Порядок запуска
+
+1. Выполнить SQL-файлы в таком порядке:
+   - `01_create_tables.sql`
+   - `02_constraints_indexes.sql`
+   - `03_insert_demo_data.sql`
+   - `09_triggers.sql`
+   - `10_procedures.sql`
+2. При необходимости выполнить демонстрационные файлы запросов и вызовов процедур.
+3. Запустить Python-скрипт для проверки связанного сценария.
