@@ -4,7 +4,6 @@ from datetime import date, timedelta
 
 
 # Настройка логирования
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -18,7 +17,6 @@ logger = logging.getLogger(__name__)
 
 
 # Подключение к БД
-
 def get_connection():
     return psycopg2.connect(
         host="localhost",
@@ -29,9 +27,7 @@ def get_connection():
     )
 
 
-
 # Проверка, подготовлена ли база
-
 def check_database_ready():
     conn = get_connection()
     cur = conn.cursor()
@@ -79,9 +75,8 @@ def check_database_ready():
         conn.close()
 
 
-
+# ПОИСК
 # 1. Найти доступные книги
-
 def find_available_books(title):
     conn = get_connection()
     cur = conn.cursor()
@@ -113,9 +108,7 @@ def find_available_books(title):
         conn.close()
 
 
-
 # 2. Выдать книгу
-
 def issue_book(copy_id, reader_id):
     conn = get_connection()
     cur = conn.cursor()
@@ -142,9 +135,7 @@ def issue_book(copy_id, reader_id):
         conn.close()
 
 
-
 # 3. Показать выдачи читателя
-
 def show_reader_loans(reader_id):
     conn = get_connection()
     cur = conn.cursor()
@@ -177,9 +168,7 @@ def show_reader_loans(reader_id):
         conn.close()
 
 
-
 # 4. Вернуть книгу
-
 def return_book(loan_id):
     conn = get_connection()
     cur = conn.cursor()
@@ -204,7 +193,6 @@ def return_book(loan_id):
 
 
 # MAIN — связанный сценарий
-
 if __name__ == "__main__":
     logger.info("Запуск Python-скрипта для работы с БД")
 
